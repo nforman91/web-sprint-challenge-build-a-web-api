@@ -35,8 +35,22 @@ function validateProjectId(req, res, next){
         .catch(next)
 }
 
+function validateProject(req, res, next){
+    const { name, description, completed } = req.body
+    if(
+        name, 
+        description, 
+        completed
+    ){
+        next();
+    }else{
+        res.status(400).json({ message: 'missing required field' })
+    }
+}
+
 module.exports = {
     logger, 
     validateActionId,
-    validateProjectId
+    validateProjectId, 
+    validateProject
 }
