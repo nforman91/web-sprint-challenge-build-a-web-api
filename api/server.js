@@ -1,4 +1,5 @@
 const express = require('express');
+const { logger } = require('./middleware/middleware');
 const server = express();
 
 // Configure your server here
@@ -9,6 +10,7 @@ const actionsRouter = require('./actions/actions-router');
 
 server.use(express.json());
 
+server.use(logger);
 server.use('/api/actions', actionsRouter);
 
 module.exports = server;
