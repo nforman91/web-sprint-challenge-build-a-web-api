@@ -20,9 +20,9 @@ router.get('/:id', validateActionId, (req, res) => {
 
 // [POST] /
 router.post('/', validateAction, (req, res, next) => {
-    const actionInfo = {...req.body, project_id: req.params.id};
+    const actionInfo = { ...req.body, project_id: req.params.id};
 
-    Actions.insert(actionInfo)
+    Actions.insert(req.params.id, actionInfo)
         .then(action => {
             res.status(201).json(action);
         })
@@ -45,9 +45,9 @@ router.put('/:id', validateActionId, validateAction, (req, res, next) => {
 router.delete('/:id', validateActionId, (req, res, next) => {
     Actions.remove(req.params.id)
         .then(() => {
-            res.status(200).json(req.action)
+            res.status(200).json(req.action);
         })
-        .catch(next)
+        .catch(next);
 });
 
 module.exports = router;

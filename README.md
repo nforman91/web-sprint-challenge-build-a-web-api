@@ -181,4 +181,7 @@ There are three different ways to send data to an existing endpoint:
 
 1. Describe tooling used to manually test the correctness of an API.
 
-There is regular middleware and error handling middleware.
+There are three different kinds of middleware:
+-Built-in middleware: middleware that comes with express (example: server.use(express.json()))
+-Third-party middleware: NPM modules we can install & import (examples: morgan, cors, helmet)
+-Custom middleware: regular or error handling middleware (which take 3 or 4 arguments, respectively)

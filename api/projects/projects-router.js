@@ -29,12 +29,20 @@ router.post('/', validateProject, (req, res, next) => {
 
 // [PUT] /:id
 router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
+    // Projects.get(req.params.id)
+    //     .then(() => {
+    //         return Projects.update(req.params.id, req.body);
+    //     })
+    //     .then(project => {
+    //         res.status(200).json(project);
+    //     })
+    //     .catch(next);
     Projects.update(req.params.id, req.body)
         .then(() => {
             return Projects.get(req.params.id);
         })
-        .then(project => {
-            res.status(200).json(project);
+        .then(() => {
+            res.status(200).json(req.project);
         })
         .catch(next);
 });
@@ -43,18 +51,18 @@ router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
 router.delete('/:id', validateProjectId, (req, res, next) => {
     Projects.remove(req.params.id)
         .then(() => {
-            res.status(200).json(req.project)
+            res.status(200).json(req.project);
         })
-        .catch(next)
+        .catch(next);
 });
 
 // [GET] /:id/actions
 router.get('/:id/actions', validateProjectId, (req, res, next) => {
     Projects.getProjectActions(req.params.id)
         .then(project => {
-            res.status(200).json(project)
+            res.status(200).json(project);
         })
-        .catch(next)
+        .catch(next);
 });
 
 module.exports = router;
