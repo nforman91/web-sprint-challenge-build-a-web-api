@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const express = require('express');
-const { logger } = require('./middleware/middleware');
 const server = express();
 
 // Configure your server here
@@ -15,7 +14,6 @@ server.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
-server.use(logger);
 server.use('/api/actions', actionsRouter);
 server.use('/api/projects', projectsRouter);
 
