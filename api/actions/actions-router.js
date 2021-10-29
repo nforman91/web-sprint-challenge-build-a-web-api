@@ -28,9 +28,16 @@ router.post('/', validateAction, (req, res, next) => {
 });
 
 // [PUT] /:id
-// router.put('/:id', validateActionId, (req, res) => {
-
-// });
+router.put('/:id', validateActionId, validateAction, (req, res, next) => {
+    Actions.update(req.params.id, req.body)
+        .then(() => {
+            return Actions.get(req.params.id);
+        })
+        .then(action => {
+            res.status(200).json(action);
+        })
+        .catch(next);
+});
 
 // [DELETE] /:id
 router.delete('/:id', validateActionId, (req, res, next) => {
