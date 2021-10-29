@@ -20,9 +20,8 @@ router.get('/:id', validateActionId, (req, res) => {
 
 // [POST] /
 router.post('/', validateAction, (req, res, next) => {
-    const actionInfo = { ...req.body, project_id: req.params.id};
-
-    Actions.insert(req.params.id, actionInfo)
+    const actionInfo = {...req.body, project_id: req.params.id}
+    Actions.insert(actionInfo)
         .then(action => {
             res.status(201).json(action);
         })

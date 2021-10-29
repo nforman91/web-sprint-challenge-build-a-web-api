@@ -29,14 +29,6 @@ router.post('/', validateProject, (req, res, next) => {
 
 // [PUT] /:id
 router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
-    // Projects.get(req.params.id)
-    //     .then(() => {
-    //         return Projects.update(req.params.id, req.body);
-    //     })
-    //     .then(project => {
-    //         res.status(200).json(project);
-    //     })
-    //     .catch(next);
     Projects.update(req.params.id, req.body)
         .then(() => {
             return Projects.get(req.params.id);
