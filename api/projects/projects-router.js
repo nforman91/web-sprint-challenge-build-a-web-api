@@ -40,9 +40,13 @@ router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
 });
 
 // [DELETE] /:id
-// router.delete('/:id', validateProjectId, (req, res, next) => {
-
-// });
+router.delete('/:id', validateProjectId, (req, res, next) => {
+    Projects.remove(req.params.id)
+        .then(() => {
+            res.status(200).json(req.project)
+        })
+        .catch(next)
+});
 
 // [GET] /:id/actions
 // router.get('/:id/actions', validateProjectId, (req, res, next) => {
