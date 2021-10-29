@@ -1,5 +1,6 @@
 const Actions = require('../actions/actions-model');
 const Projects = require('../projects/projects-model');
+// const yup = require('yup');
 
 function logger(req, res, next) {
     const method = req.method;
@@ -16,11 +17,11 @@ function validateActionId(req, res, next){
                 req.action = possibleAction;
                 next();
             }else{
-                res.status(404).json({ message: 'action not found' })
+                res.status(404).json({ message: 'action not found' });
             }
         })
-        .catch(next)
-}
+        .catch(next);
+};
 
 function validateProjectId(req, res, next){
     Projects.get(req.params.id)
@@ -29,28 +30,65 @@ function validateProjectId(req, res, next){
                 req.project = possibleProject;
                 next();
             }else{
-                res.status(404).json({ message: 'project not found' })
+                res.status(404).json({ message: 'project not found' });
             }
         })
-        .catch(next)
-}
+        .catch(next);
+};
 
-function validateProject(req, res, next){
-    const { name, description, completed } = req.body
+function validateAction(req, res, next){
+    const { project_id, description, notes, completed } = req.body
     if(
-        name, 
-        description, 
+        project_id && 
+        description && 
+        notes &&
         completed
     ){
         next();
     }else{
-        res.status(400).json({ message: 'missing required field' })
+        res.status(400).json({ message: 'missing required field' });
     }
-}
+};
+
+function validateProject(req, res, next){
+    const { name, description, completed } = req.body
+    if(
+        name && 
+        description && 
+        completed
+    ){
+        next();
+    }else{
+        res.status(400).json({ message: 'missing required field' });
+    }
+};
+
+// const projectSchema = yup.object().shape({
+//     name: yup
+//         .required('name required'),
+//     description: yup
+//         .required('description required'),
+//     completed: yup
+//         .required('completed value required')
+// })
+
+// async function validateProject(req, res, next){
+//     try{
+//         const validated = await projectSchema.validate(
+//             req.body, 
+//             { strict: false, stripUnknown: true }
+//         )
+//         req.body = validated
+//         next()
+//     }catch(err){
+//         next({ status: 422, message: err.message })
+//     }
+// }
 
 module.exports = {
     logger, 
     validateActionId,
     validateProjectId, 
+    validateAction,
     validateProject
 }
