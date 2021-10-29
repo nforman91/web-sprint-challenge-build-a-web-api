@@ -59,7 +59,7 @@ Inside `api/projects/projects-router.js` build the following endpoints:
 - [x] `[DELETE] /api/projects/:id`
   - Returns no response body.
   - If there is no project with the given `id` it responds with a status code 404.
-- [ ] `[GET] /api/projects/:id/actions`
+- [x] `[GET] /api/projects/:id/actions`
   - Returns an array of actions (could be empty) belonging to a project with the given `id`.
   - If there is no project with the given `id` it responds with a status code 404.
 
@@ -137,7 +137,7 @@ We have provided test data for all the resources.
 
 ## Submission format
 
-- [ ] Submit via Codegrade by pushing commits to your `main` branch.
+- [x] Submit via Codegrade by pushing commits to your `main` branch.
 - [ ] Check Codegrade before the deadline to compare its results against your local tests.
 - [ ] Check Codegrade on the days following the Sprint Challenge for reviewer feedback.
 - [ ] New commits will be evaluated by Codegrade if pushed _before_ the sprint challenge deadline.
@@ -147,7 +147,38 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+
+Node.js:
+-Uses JavaScript for both client & server apps
+-Single threaded
+-Asynchronous
+-Has access to NPM registry
+
+Express:
+-Middleware: functions that CAN perform operations on req
+-Routing: breaks up application into smaller parts
+-Convinience Helpers: provides functionality
+-Views: dynamically renders HTML on the server
+
 1. Understand and explain the use of Middleware.
+
+Middleware are functions that extend software. They are used to add features to express.
+
 1. The basic principles of the REST architectural style.
+
+-Everything is a resource
+-Each resource is accessible via a unique URI
+-Resources can have multiple representations
+-Communication is done over the stateless protocol (HTTP)
+-Management of resources is done via HTTP methods
+
 1. Understand and explain the use of Express Routers.
+
+There are three different ways to send data to an existing endpoint:
+-Dynamic Route Parameters: used to send up bits of information from the resource we're requesting
+-Key/Value Pairs Inside the Query String: sending information directly on the URL we're requesting
+-Request Body Objects: objects that clients send with relevant info for the API they're expecting
+
 1. Describe tooling used to manually test the correctness of an API.
+
+There is regular middleware and error handling middleware.
